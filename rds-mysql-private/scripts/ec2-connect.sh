@@ -7,8 +7,8 @@ ec2-connect() {
     EC2_PUBLIC_DNS=$(echo "$JSON" | jq --raw-output '.ec2_public_dns.value')
     log EC2_PUBLIC_DNS $EC2_PUBLIC_DNS
 
-    RDS_ADDRESS=$(echo "$JSON" | jq --raw-output '.rds_address.value')
-    log RDS_ADDRESS $RDS_ADDRESS
+    HOST=$(echo "$JSON" | jq --raw-output '.db_instance_address.value')
+    log HOST $HOST
 
     # SSH add key to known_hosts to not be prompt by :
     # 'key fingerprint ... Are you sure you want to continue connecting (yes/no) ?'
@@ -31,7 +31,7 @@ ec2-connect() {
         ssh-keyscan -t rsa $EC2_PUBLIC_DNS >> ~/.ssh/known_hosts
     fi
 
-    info SSH "if success, execute on the instance :" "mysql --user=$RDS_USERNAME --password=$RDS_PASS --host=$RDS_ADDRESS"
+    info SSH "if success, execute on the instance :" "mysql --user=$MYSQL_USERNAME --password=$MYSQL_PASSWORD --host=$HOST"
 
     # ec2-user@.. because it's Amazon Linux 2 AMI
     #   ubuntu@.. if it was Ubuntu Server

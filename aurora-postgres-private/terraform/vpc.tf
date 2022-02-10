@@ -40,8 +40,8 @@ resource "aws_default_security_group" "vpc_security_group" {
 
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group_rule
 # allow the ec2 instances (endorsed by the security group `aws_security_group.instance`) to
-# be connected with the rds mysql instance (allow inbound port 3306)
-resource "aws_security_group_rule" "mysql_ec2_instances_sg" { # TODO UPDATE NOM !!!!!!!!!!!!!!
+# be connected with the rds postgreSQL instance (allow inbound port 5432)
+resource "aws_security_group_rule" "postgresql_ec2_instances_sg" {
   # this rule is added to the security group defined by `security_group_id`
   # and this id target the `default` security group associated with the created VPC
   security_group_id = aws_default_security_group.vpc_security_group.id

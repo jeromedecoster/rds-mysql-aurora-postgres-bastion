@@ -27,9 +27,8 @@ resource "aws_instance" "instance" {
 # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group
 # create a security group for ec2 instances in the current project VPC
 resource "aws_security_group" "instance" {
-  name        = "${var.project_name}-instance-sg"
-  vpc_id      = module.vpc.vpc_id
-  # description = "${var.project_name} - sg for EC2 instances (inbound SSH)"
+  name   = "${var.project_name}-instance-sg"
+  vpc_id = module.vpc.vpc_id
 
   ingress {
     protocol  = "tcp"

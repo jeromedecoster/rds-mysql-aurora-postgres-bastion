@@ -8,17 +8,21 @@ resource "aws_db_instance" "db_instance" {
   password             = var.mysql_password
   parameter_group_name = "default.mysql5.7"
 
+  # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#db_subnet_group_name
   db_subnet_group_name = aws_db_subnet_group.db_subnet_group.name
-  # vpc_security_group_ids = [aws_security_group.db.id]
+  # https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/db_instance#vpc_security_group_ids
   vpc_security_group_ids = [
     module.vpc.default_security_group_id
   ]
+
+  # private db
   publicly_accessible = false
   skip_final_snapshot = true
 }
 
 resource "aws_db_subnet_group" "db_subnet_group" {
-  name       = "${var.project_name}-db-subnet-group"
+  name = "${var.project_name}-db-subnet-group"
+  # we use the private subnets to make the database private
   subnet_ids = module.vpc.private_subnets
 
   tags = {

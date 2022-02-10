@@ -28,7 +28,7 @@ export -f log info warn error
 #
 # overwrite TF variables
 #
-export TF_VAR_project_name=$AWS_REGION
+export TF_VAR_project_name=$PROJECT_NAME
 export TF_VAR_aws_region=$AWS_REGION
 export TF_VAR_mysql_identifier=$PROJECT_NAME
 export TF_VAR_mysql_username=$MYSQL_USERNAME

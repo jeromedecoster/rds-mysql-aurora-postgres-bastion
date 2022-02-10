@@ -16,7 +16,7 @@ validate: # terraform format + validation
 apply: # terraform plan + apply (deploy)
 	./make.sh apply
 
-ec2-connect: # ssh connect to the ec2 instance  
+ec2-connect: # ssh connect to the ec2 instance
 	./make.sh ec2-connect
 
 bastion-create: # create an ec2 bastion host
